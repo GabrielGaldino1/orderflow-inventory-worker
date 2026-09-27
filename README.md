@@ -1,13 +1,21 @@
 # OrderFlow Inventory Worker
 
-Quarkus application responsible for inventory reservation, rejection, and release.
+Quarkus application that will reserve, reject, and release inventory for the OrderFlow saga.
 
-## Planned foundation
+## F02 foundation
 
 - Java 17 and Maven Wrapper.
-- Quarkus health checks, Hibernate ORM with Panache, PostgreSQL, and Kafka.
-- Liveness and readiness endpoints.
-- Database migrations and Testcontainers integration tests.
+- Quarkus Health, Hibernate ORM with Panache, PostgreSQL, Flyway, and Kafka client.
+- Owned PostgreSQL database configured only through environment variables.
+- Liveness at `/q/health/live` and readiness at `/q/health/ready`.
+- Foundation health tests backed by an in-memory PostgreSQL-compatible H2 profile.
 
-Application generation is intentionally deferred to the next Phase 1 block.
+No Kafka consumer, reservation logic, or inventory domain table is implemented in F02.
 
+## Build and test
+
+```powershell
+./mvnw.cmd clean verify
+```
+
+Local runtime variables and orchestration commands are documented in `orderflow-platform`.
